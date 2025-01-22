@@ -19,7 +19,7 @@ func ConnectDatabase(dsn string) (*gorm.DB, error) {
 }
 
 func Connect() (*gorm.DB) {
-    	// Initialize logger
+    // Initialize logger
 	logInstance, err := logger.GetLoggerInstance()
 	if err != nil {
 		logInstance.DPanic("Error loading config: %v", zap.Error(err))
@@ -38,4 +38,27 @@ func Connect() (*gorm.DB) {
 	logInstance.Info("Database connected successfully!")
 
     return DB
+}
+
+func ProvideDatabase(cfg *config.Config) *gorm.DB {
+	dbConfig := cfg.Database
+
+	// Initialize logger
+	logInstance, err := logger.GetLoggerInstance()
+	if err != nil {
+		logInstance.DPanic("Error loading config: %v", zap.Error(err))
+	}
+
+	dsn := fmt.Sprintf(
+		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+		dbConfig.Host, dbConfig.Port, dbConfig.User, dbConfig.Password, dbConfig.Name,
+	)
+
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		logInstance.DPanic("Failed to connect to database: %v", zap.Error(err))
+	}
+
+	logInstance.Info("Database connected successfully!")
+	return db
 }

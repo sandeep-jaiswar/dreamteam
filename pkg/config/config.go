@@ -6,8 +6,6 @@ import (
 
 // Config holds application configuration
 type Config struct {
-	AppEnv string
-	Port   string
 	App struct {
 		Name string
 		Env  string
@@ -41,4 +39,25 @@ func LoadConfig() {
 	if err != nil {
 		panic("Error unmarshaling config: "+ err.Error())
 	}
+}
+
+
+func ProvideConfig() *Config {
+	viper.SetConfigName("config")
+	viper.SetConfigType("yaml")
+	viper.AddConfigPath("./configs")
+	viper.AutomaticEnv()
+
+	err := viper.ReadInConfig()
+	if err != nil {
+		panic("Error loading config: " + err.Error())
+	}
+
+	var appConfig Config
+	err = viper.Unmarshal(&appConfig)
+	if err != nil {
+		panic("Error unmarshaling config: "+ err.Error())
+	}
+
+	return &appConfig
 }
