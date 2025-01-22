@@ -21,6 +21,13 @@ type Config struct {
 	Jwt struct {
 		SecretKey string
 	}
+	GroupCache struct {
+		Name      string
+		CacheSize int64
+	}
+	Profiling struct {
+		Port int
+	}
 }
 
 var AppConfig Config

@@ -9,3 +9,11 @@ database:
   user: postgres
   password: password
   name: sandeepsecurities
+
+jwt:
+  SecretKey: secret
+  expiration: 1h
+
+profiling:
+  enabled: true
+  port: 6060
