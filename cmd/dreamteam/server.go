@@ -10,6 +10,8 @@ import (
 	"github.com/sandeep-jaiswar/dreamteam/pkg/database"
 	"github.com/sandeep-jaiswar/dreamteam/pkg/http"
 	"github.com/sandeep-jaiswar/dreamteam/pkg/logger"
+	"github.com/sandeep-jaiswar/dreamteam/pkg/middleware"
+	"github.com/sandeep-jaiswar/dreamteam/pkg/rbac"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 )
@@ -34,6 +36,8 @@ func main() {
 		),
 		// Register lifecycle hooks
 		fx.Invoke(
+			middleware.SecurityHeaders,
+			rbac.InitializeRBAC,
 			http.StartHTTPServer,
 		),
 	)

@@ -18,6 +18,9 @@ type Config struct {
 		Password string
 		Name     string
 	}
+	Jwt struct {
+		SecretKey string
+	}
 }
 
 var AppConfig Config
