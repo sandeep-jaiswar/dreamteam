@@ -47,10 +47,9 @@ func LoadConfig() {
 
 	err = viper.Unmarshal(&AppConfig)
 	if err != nil {
-		panic("Error unmarshaling config: "+ err.Error())
+		panic("Error unmarshaling config: " + err.Error())
 	}
 }
-
 
 func ProvideConfig() *Config {
 	viper.SetConfigName("config")
@@ -66,7 +65,7 @@ func ProvideConfig() *Config {
 	var appConfig Config
 	err = viper.Unmarshal(&appConfig)
 	if err != nil {
-		panic("Error unmarshaling config: "+ err.Error())
+		panic("Error unmarshaling config: " + err.Error())
 	}
 
 	return &appConfig

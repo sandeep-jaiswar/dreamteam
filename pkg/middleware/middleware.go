@@ -7,9 +7,9 @@ import (
 
 func SecurityHeaders() gin.HandlerFunc {
 	secureMiddleware := secure.New(secure.Options{
-		FrameDeny:     true,
+		FrameDeny:          true,
 		ContentTypeNosniff: true,
-		BrowserXssFilter : true,
+		BrowserXssFilter:   true,
 	})
 	return func(c *gin.Context) {
 		err := secureMiddleware.Process(c.Writer, c.Request)
