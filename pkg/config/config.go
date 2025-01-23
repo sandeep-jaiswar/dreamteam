@@ -30,27 +30,6 @@ type Config struct {
 	}
 }
 
-var AppConfig Config
-
-// LoadConfig loads configuration from environment variables with defaults
-func LoadConfig() {
-
-	viper.SetConfigName("config")
-	viper.SetConfigType("yaml")
-	viper.AddConfigPath("./configs")
-	viper.AutomaticEnv()
-
-	err := viper.ReadInConfig()
-	if err != nil {
-		panic("Error loading config: " + err.Error())
-	}
-
-	err = viper.Unmarshal(&AppConfig)
-	if err != nil {
-		panic("Error unmarshaling config: " + err.Error())
-	}
-}
-
 func ProvideConfig() *Config {
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")

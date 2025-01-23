@@ -11,7 +11,7 @@ import (
 	"github.com/sandeep-jaiswar/dreamteam/pkg/http"
 	"github.com/sandeep-jaiswar/dreamteam/pkg/logger"
 	"github.com/sandeep-jaiswar/dreamteam/pkg/middleware"
-	"github.com/sandeep-jaiswar/dreamteam/pkg/profiling"
+	// "github.com/sandeep-jaiswar/dreamteam/pkg/profiling"
 	"github.com/sandeep-jaiswar/dreamteam/pkg/rbac"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
@@ -19,7 +19,7 @@ import (
 
 func main() {
 	// Load configuration
-	config.LoadConfig()
+	config.ProvideConfig()
 
 	// Initialize logger
 	logInstance, err := logger.GetLoggerInstance()
@@ -44,7 +44,7 @@ func main() {
 			middleware.SecurityHeaders,
 			rbac.InitializeRBAC,
 			http.StartHTTPServer,
-			profiling.StartProfilingServer,
+			//profiling.StartProfilingServer,
 		),
 	)
 

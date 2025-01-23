@@ -15,7 +15,7 @@ func StartProfilingServer() {
 	go func() {
 		// Initialize logger
 		logInstance, err := logger.GetLoggerInstance()
-		port := config.AppConfig.Profiling.Port
+		port := config.ProvideConfig().App.Port
 		if err != nil {
 			logInstance.DPanic("Error loading config: %v", zap.Error(err))
 		}

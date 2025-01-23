@@ -7,7 +7,7 @@ import (
 	"github.com/sandeep-jaiswar/dreamteam/pkg/config"
 )
 
-var jwtKey = []byte(config.AppConfig.Jwt.SecretKey)
+var jwtKey = []byte(config.ProvideConfig().Jwt.SecretKey)
 
 type Claims struct {
 	Username string `json:"username"`
